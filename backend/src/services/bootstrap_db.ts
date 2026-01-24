@@ -8,8 +8,6 @@ export function bootstrap(db: sqlite3.Database) {
       price REAL NOT NULL CHECK(price >= 0),
       description TEXT NOT NULL,
       category TEXT NOT NULL,
-      gender TEXT NOT NULL CHECK(gender IN ('M', 'F', 'U')),
-      size TEXT NOT NULL CHECK(size IN ('P', 'M', 'G', 'U')),
       image_url TEXT
     );
 

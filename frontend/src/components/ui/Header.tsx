@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, UserIcon } from "lucide-react";
-
+import "@/index.css";
 interface HeaderProps {
   onUserClick: () => void;
 }
@@ -11,11 +11,11 @@ export function Header({ onUserClick }: HeaderProps) {
     <header className="sticky top-0 z-40 w-full bg-[#3D5F7B] text-slate-100 shadow-sm">
       <div className="h-16 px-2 sm:px-4 md:px-6 flex items-center justify-between">
         {/* Logo + Search */}
-        <div className="flex items-center gap-6 flex-1 min-w-0">
+        <div className="flex items-center gap-5 flex-1 min-w-0">
           {/* Logo: text and icon for larger screens / just icon for smaller screens */}
           <img src="/src/assets/logo.svg" alt="Logo" className="h-8 w-8" />
-          <div className="hidden md:inline-block font-bold text-[clamp(18px,2.5vw,22px)]">
-            Timeless
+          <div className="hidden monomaniac-one-regular text-2xl md:inline-block h-9">
+              Vortex
           </div>
 
           {/* Search */}

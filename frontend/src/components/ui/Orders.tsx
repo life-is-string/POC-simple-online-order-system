@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "./scroll-area";
 import type { Order } from "@/interfaces";
+import {Package, PackageX } from "lucide-react";
 
 interface OrdersSheetProps {
   open: boolean;
@@ -22,11 +23,15 @@ export function Orders({ open, onClose, orders }: OrdersSheetProps) {
         h-full
         p-0">
         <SheetHeader className="px-4 py-4 border-b">
-          <SheetTitle>Your Orders</SheetTitle>
+          <div className="flex items-center gap-2">
+            <Package className="h-5 w-5"/>
+            <SheetTitle>Your Orders</SheetTitle>
+          </div>
         </SheetHeader>
 
         {orders.length === 0 ? (
-          <div className="flex items-center justify-center h-full text-muted-foreground">
+          <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground gap-3">
+            <PackageX className="h-10 w-10 opacity-40" />
             No orders yet.
           </div>
         ) : (

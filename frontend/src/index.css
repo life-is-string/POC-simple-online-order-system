@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
@@ -110,6 +111,11 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
+}
+.monomaniac-one-regular {
+  font-family: "Monomaniac One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @layer base {

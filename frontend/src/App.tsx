@@ -3,6 +3,7 @@ import { Header } from "./components/ui/Header";
 import { ScrollArea } from "./components/ui/scroll-area";
 import { Catalog } from "./components/ui/Catalog";
 import {Orders} from "./components/ui/Orders";
+import "@/index.css";
 import { Toaster, toast } from "react-hot-toast";
 import {
   Cart,
