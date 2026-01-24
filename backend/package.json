@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
-    "bootstrap": "ts-node src/bootstrap.ts"
+    "clean-db": "ts-node src/services/clean_db.ts"
   },
   "keywords": [],
   "author": "",

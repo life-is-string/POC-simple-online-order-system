@@ -204,7 +204,7 @@ export function CartSheet({
         {items.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground gap-3">
             <Frown className="h-10 w-10 opacity-40" />
-            <p className="text-lg">Your cart is empty</p>
+            <p >Your cart is empty</p>
           </div>
         ) : (
           <ScrollArea className="flex-1 px-4">

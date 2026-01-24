@@ -2,7 +2,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, UserIcon } from "lucide-react";
 
-export function Header() {
+interface HeaderProps {
+  onUserClick: () => void;
+}
+
+export function Header({ onUserClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#3D5F7B] text-slate-100 shadow-sm">
       <div className="h-16 px-2 sm:px-4 md:px-6 flex items-center justify-between">
@@ -29,6 +33,7 @@ export function Header() {
           aria-label="User"
           variant="default"
           className="shrink-0"
+          onClick={onUserClick}
         >
           <UserIcon strokeWidth={2.5} />
         </Button>

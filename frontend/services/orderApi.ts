@@ -12,6 +12,6 @@ export async function postOrder(order: Order) {
   if (!res.ok) {
     throw new Error("Failed to post order");
   }
-
+  console.log("Order posted successfully");
   return res.json();
 }
