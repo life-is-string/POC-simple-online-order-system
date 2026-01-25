@@ -4,7 +4,7 @@ This repository contains a **Proof of Concept (POC)** built to validate the syst
 
 The goal of this project is to serve as an experimental base for testing features, frontend/backend integration, and development environment setup.
 
-## 🚀 Tech Stack
+## Dependencies
 
 ### Frontend
 
@@ -22,7 +22,7 @@ The goal of this project is to serve as an experimental base for testing feature
 * TypeScript
 * SQLite
 
-### Tooling
+### Build
 
 * npm
 * Vite Dev Server
@@ -50,7 +50,7 @@ The project is managed from the **root directory**, which orchestrates both fron
 
 Before running the project, make sure you have:
 
-* **Node.js 18+**
+* **[Node.js 18+](https://nodejs.org/en/download)**
 * **npm** (included with Node.js)
 
 Check your versions:
@@ -65,16 +65,25 @@ npm -v
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/life-is-string/POC-simple-online-order-system
 ```
 
 2. Navigate to the project root:
 
 ```bash
-cd your-repository
+cd POC-simple-online-order-system
 ```
 
 3. Install dependencies:
+
+```bash
+cd backend
+npm install
+cd ..
+cd frontend
+npm install
+```
+Or run in the **root directory**
 
 ```bash
 npm install
@@ -97,19 +106,42 @@ This command runs both frontend and backend in development mode.
 
 Ports may vary depending on configuration. Check the terminal output if needed.
 
-## 🧪 Notes
+## Development notes
 
-* This project is a **Proof of Concept**, not intended for production use.
-* Architecture and implementation decisions prioritize clarity and experimentation over optimization.
+This initiative provided an opportunity to explore and strengthen my experience with full-stack development using and learning more about React and Node.js. The process all along involved architectural design and planning, full-time research, and iterative system implementations. 
 
-## 🔮 Future Improvements
+In the end, I am very satisfied with the final stable version, which guarantees a functional frontend–backend integration and a user-friendly graphical interface. Overall, this development journey was both technically enriching and professionally rewardful.
+![Concept idea flow](https://github.com/life-is-string/POC-simple-online-order-system/blob/main/fluxo_poc.png)
+
+### Implemented functionalities:
+* [x] Product Listing
+  * Return a list of products from the database with: id, name, description, price, image (image is optional, can be static).
+* [x] Cart (API)
+  * Add item to cart.
+  * Remove item from cart.
+  * Change quantity.
+  * Validation (minimum quantity per product = 1, maximum quantity per product = 10).
+  Order Checkout (simulated)
+  * Endpoint that receives the cart, marks it as sent, and returns a success message.
+* [x] Order Checkout
+  * Button to finalize.
+  * Display success screen/message.
+  * Clear cart after checkout.
+* [x] Functional
+  * Cart persistence in localStorage.
+  * Feedback toasts (e.g., "Product added
+  successfully").
+  * Componentization and UI reusability.
+  * Styling with a framework
+  * Folder organization following good practices.
+  * Smooth animations or transitions.
+  * Responsive layout.
+  * Friendly error messages
+
+## 🔮 Future ideas
 
 * Search and filter api
-* Authentication and authorization
-* Database migrations
-* Automated tests
-
-## 📄 License
-
-This project is intended for educational and experimental purposes.
-
+* Automated test
+* Modularization of services
+* API docs
+* Catalog pagination api
