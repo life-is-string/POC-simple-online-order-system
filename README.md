@@ -71,12 +71,17 @@ git clone https://github.com/life-is-string/POC-simple-online-order-system
 2. Navigate to the project root:
 
 ```bash
-cd your-repository
+cd POC-simple-online-order-system
 ```
 
 3. Install dependencies:
 
 ```bash
+npm install
+cd backend
+npm install
+cd ..
+cd frontend
 npm install
 ```
 
