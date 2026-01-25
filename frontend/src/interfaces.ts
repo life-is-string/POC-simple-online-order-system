@@ -9,80 +9,87 @@ export interface Product {
   price: number;
   description: string;
   category: string;
-  gender: 'M' | 'F' | 'U';
-  size: 'P' | 'M' | 'G' | 'U';
+  gender: "M" | "F" | "U";
+  size: "P" | "M" | "G" | "U";
   image_url: string | null;
 }
 
 export interface CartItem {
-  product: Product
-  quantity: number
+  product: Product;
+  quantity: number;
 }
 
-export interface Order{
+export interface Order {
   id: string;
-  items: CartItem[]
-  total: number
+  items: CartItem[];
+  total: number;
   time: string;
-  status: 'sent' | 'cancelled';
+  status: "sent" | "cancelled";
 }
 
 //Local Storage Cart class
-export class Cart{
+export class Cart {
   items: CartItem[] = [];
   private total: number = 0;
 
-  addProduct(product: Product): void{ //add by 1
-    const existingItem = this.items.find(item => item.product.id === product.id); //match?
+  addProduct(product: Product): void {
+    const existingItem = this.items.find(
+      (item) => item.product.id === product.id,
+    );
 
-    if(existingItem){ //increases by logic
-      if(existingItem.quantity++ > MAX_QTY){
-        console.warn('Total quantity for this product cannot exceed ', MAX_QTY);
-        throw new Error('Max quantity exceeded.');
-        return;
+    if (existingItem) {
+      if (existingItem.quantity >= MAX_QTY) {
+        console.warn(`Total quantity cannot exceed ${MAX_QTY}`);
+        throw new Error("Max quantity exceeded");
       }
-      existingItem.quantity ++;
-    }else{
-      const newItem: CartItem = {
-        product: product,
-        quantity: 1
-      };
-      this.items.push(newItem);
+
+      existingItem.quantity += 1;
+      return;
     }
+
+    this.items.push({
+      product,
+      quantity: 1,
+    });
   }
-  remove(productId: number): void{
-    if(!this.items.find(item => item.product.id === productId)){
-      console.warn('Product not found in cart.');
-      throw new Error('Product not found in cart.');
+
+  remove(productId: number): void {
+    if (!this.items.find((item) => item.product.id === productId)) {
+      console.warn("Product not found in cart.");
+      throw new Error("Product not found in cart.");
     }
     //new list without the selected product
-    this.items = this.items.filter(item => item.product.id !== productId);
+    this.items = this.items.filter((item) => item.product.id !== productId);
   }
   //increase/decrease by input
   updateQuantity(item: CartItem, newQuantity: number): void {
-    if (newQuantity <= 10 && newQuantity >= 1) {
-      item.quantity = newQuantity;
-    }else{
-      console.warn(`Quantity must be between ${MIN_QTY} and ${MAX_QTY}.`);
+    if (newQuantity < MIN_QTY || newQuantity > MAX_QTY) {
+      throw new Error(`Quantity must be between ${MIN_QTY} and ${MAX_QTY}`);
     }
+
+    item.quantity = newQuantity;
   }
+
   private get_total(): void {
-    this.items.forEach((item)=>{this.total+= item.quantity * item.product.price})
+    this.total = this.items.reduce(
+      (sum, item) => sum + item.quantity * item.product.price,
+      0,
+    );
   }
+
   checkout(): Order | null {
-    if(this.items.length === 0){
-      console.warn('Cart is empty.');
+    if (this.items.length === 0) {
+      console.warn("Cart is empty.");
       return null;
     }
     this.get_total();
-    const order: Order =
-    {
+    const order: Order = {
       id: crypto.randomUUID(),
-      items: structuredClone(this.items), 
+      items: structuredClone(this.items),
       total: this.total,
-      time: new Date().toISOString().replace('T', ' ').slice(0, 19),
-      status: 'sent'
-    }
+      time: new Date().toISOString().replace("T", " ").slice(0, 19),
+      status: "sent",
+    };
     //empty cart
     this.items = [];
     this.total = 0;

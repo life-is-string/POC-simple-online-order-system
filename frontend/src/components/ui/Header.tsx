@@ -19,7 +19,7 @@ export function Header({ onUserClick }: HeaderProps) {
           </div>
 
           {/* Search */}
-          <div className="relative flex-1 max-w-70 sm:max-w-112.5 md:max-w-150">
+          <div className="relative flex-1 max-w-70 md:max-w-100">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
             <Input
               className="h-9 sm:h-9 w-full pl-10 bg-white text-slate-900 placeholder:text-slate-400 border border-slate-300 rounded-md"

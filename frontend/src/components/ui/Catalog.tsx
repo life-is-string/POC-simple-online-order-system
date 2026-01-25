@@ -1,23 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
-import type { Product } from "@/interfaces";
+import { MAX_QTY, type Product } from "@/interfaces";
 import { Button } from "@/components/ui/button";
 import { Plus, Check } from "lucide-react";
 interface ProductsGridProps {
   products: Product[];
   addToCart: (product: Product) => void;
+  getProductQty: (productId: number) => number;
 }
 
 interface AddToCartButtonProps {
   product: Product;
   addToCart: (product: Product) => void;
+  quantity: number;
 }
 
 export function AddToCartButton({
   product,
   addToCart,
+  quantity
 }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false);
+  const isMaxed = quantity >= MAX_QTY;
 
   const handleClick = () => {
     addToCart(product);
@@ -32,13 +36,14 @@ export function AddToCartButton({
       onClick={handleClick}
       className="rounded-full hover:scale-105 active:scale-90
       transition duration-150 ease-in-out"
+      disabled={isMaxed}
     >
       {added ? <Check /> : <Plus />}
     </Button>
   );
 }
 
-export function Catalog({ products, addToCart }: ProductsGridProps) {
+export function Catalog({ products, addToCart, getProductQty }: ProductsGridProps) {
   let content;
 
   if (products.length === 0) {
@@ -67,12 +72,12 @@ export function Catalog({ products, addToCart }: ProductsGridProps) {
           <CardTitle>{product.name}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col flex-1 p-1 leading-snug">
-          <p className="text-xs text-slate-700 overflow-auto max-h-12">
+          <p className="text-xs text-slate-700 max-h-12 line-clamp-2 max-w-[85%] mx-auto">
             {product.description}
           </p>
           <div className="flex items-center justify-between">
             <p className="font-bold text-sm">R${product.price.toFixed(2)}</p>
-            <AddToCartButton product={product} addToCart={addToCart} />
+            <AddToCartButton product={product} addToCart={addToCart} quantity={getProductQty(product.id)} />
           </div>
         </CardContent>
       </Card>

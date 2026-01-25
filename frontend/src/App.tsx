@@ -2,7 +2,7 @@ import "./App.css";
 import { Header } from "./components/ui/Header";
 import { ScrollArea } from "./components/ui/scroll-area";
 import { Catalog } from "./components/ui/Catalog";
-import {Orders} from "./components/ui/Orders";
+import { Orders } from "./components/ui/Orders";
 import "@/index.css";
 import { Toaster, toast } from "react-hot-toast";
 import {
@@ -10,6 +10,8 @@ import {
   type CartItem,
   type Product,
   type Order,
+  MAX_QTY,
+  MIN_QTY,
 } from "@/interfaces";
 import { CartSheet } from "./components/ui/Cart";
 import { useState, useEffect } from "react";
@@ -26,49 +28,53 @@ function App() {
 
   const addToCart = (product: Product) => {
     try {
-      cart.addProduct(product); //enlist product with quantity 1
-      setCartItems([...cart.items]); // re-render for cart sheet component
-    } catch (err) {
+      cart.addProduct(product);
+      syncCart();
+      toast.success("Product added to cart!");
+    } catch {
       toast.error("Failed to add product to cart");
     }
   };
+
   const syncCart = () => setCartItems([...cart.items]);
 
   const increase = (productId: number) => {
     const item = cart.items.find((i) => i.product.id === productId);
-    if (item) {
-      cart.updateQuantity(item, item.quantity + 1);
-      syncCart();
-    }
+    if (!item) return;
+
+    cart.updateQuantity(item, item.quantity + 1);
+    syncCart();
   };
 
   const decrease = (productId: number) => {
-    const item = cart.items.find((i) => i.product.id === productId);
-    if (item) {
-      cart.updateQuantity(item, item.quantity - 1);
-      syncCart();
-    }
-  };
+  const item = cart.items.find((i) => i.product.id === productId);
+  if (!item) return;
+
+  cart.updateQuantity(item, item.quantity - 1);
+  syncCart();
+};
+
 
   const remove = (productId: number) => {
-    try{
+    try {
       cart.remove(productId);
-    }catch(err){
+    } catch (err) {
       toast.error("Failed to remove item from cart");
-    };
+    }
     syncCart();
+  };
+
+  const getProductQty = (productId: number) => {
+    return cartItems.find((i) => i.product.id === productId)?.quantity ?? 0;
   };
 
   const updateQuantity = (productId: number, qty: number) => {
     const item = cart.items.find((i) => i.product.id === productId);
     if (!item) return;
 
-    try {
-      cart.updateQuantity(item, qty);
-      syncCart();
-    } catch (err) {
-      console.warn(err);
-    }
+    const safeQty = Math.max(MIN_QTY, Math.min(qty, MAX_QTY));
+
+    cart.updateQuantity(item, safeQty);
     syncCart();
   };
 
@@ -82,7 +88,7 @@ function App() {
 
     const orderToPost = {
       id: order.id,
-      time: order.time, 
+      time: order.time,
       items: order.items,
       total: order.total,
       status: "sent",
@@ -94,7 +100,7 @@ function App() {
       postOrder(orderToPost);
       toast.success(`Order completed! Total: R$${order.total.toFixed(2)}`);
       syncCart();
-      setSessionOrders(prev => [...prev, order]) //update session orders with previous + newer ones
+      setSessionOrders((prev) => [...prev, order]); //update session orders with previous + newer ones
     } catch (err) {
       console.error("Checkout failed:", err);
     }
@@ -151,7 +157,11 @@ function App() {
 
         <div className="mt-4 w-full max-w-5xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <ScrollArea className="h-[calc(100vh-64px)] overflow-y-auto">
-            <Catalog products={productsList} addToCart={addToCart} />
+            <Catalog
+              products={productsList}
+              addToCart={addToCart}
+              getProductQty={getProductQty}
+            />
           </ScrollArea>
         </div>
       </div>

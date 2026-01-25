@@ -40,7 +40,6 @@ function CartRow({
   onRemove,
   onUpdate,
 }: CartRowProps) {
-
   const [qty, setQty] = useState<number | "">(item.quantity); //Custom input control for item quantity
 
   useEffect(() => {
@@ -80,31 +79,22 @@ function CartRow({
             type="number"
             min={MIN_QTY}
             max={MAX_QTY}
-            value={qty}
+            value={item.quantity}
+            inputMode="numeric"
             onChange={(e) => {
-              const value = e.target.value;
+              const value = Number(e.target.value);
+              if (Number.isNaN(value)) return;
 
-              // empty string while typing
-              if (value === "") {
-                setQty(value as unknown as number);
-                return;
-              }
+              const safeQty = Math.max(MIN_QTY, Math.min(value, MAX_QTY));
 
-              // remove annoying zeros at the beginning
-              const sanitized = value.replace(/^0+(?=\d)/, "");
-              setQty(Number(sanitized));
+              onUpdate(safeQty);
             }}
             onBlur={() => {
-              const value =
-                qty === "" || Number.isNaN(Number(qty)) ? MIN_QTY : Number(qty);
-
-              if (value < MIN_QTY || value > MAX_QTY) {
-                onUpdate(MIN_QTY);
-                setQty(MIN_QTY);
-                return;
-              }
-
-              onUpdate(value);
+              const safeQty = Math.max(
+                MIN_QTY,
+                Math.min(item.quantity, MAX_QTY),
+              );
+              onUpdate(safeQty);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -112,19 +102,20 @@ function CartRow({
               }
             }}
             className="
-              w-12
-              text-center
-              border
-              rounded-md
-              text-sm
-              focus:outline-none
-              focus:ring-2
-              focus:ring-[#3D5F7B]
-              [appearance:textfield]
-              [&::-webkit-outer-spin-button]:appearance-none
-              [&::-webkit-inner-spin-button]:appearance-none
-            "
+    w-12
+    text-center
+    border
+    rounded-md
+    text-sm
+    focus:outline-none
+    focus:ring-2
+    focus:ring-[#3D5F7B]
+    [appearance:textfield]
+    [&::-webkit-outer-spin-button]:appearance-none
+    [&::-webkit-inner-spin-button]:appearance-none
+  "
           />
+
           <Button
             className="
               disabled:opacity-40
@@ -164,7 +155,6 @@ export function CartSheet({
   onCheckout,
   onUpdate,
 }: CartProps) {
-
   const total = items.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0,
@@ -174,7 +164,7 @@ export function CartSheet({
     <Sheet>
       <SheetTrigger asChild>
         <Button className="fixed bottom-6 right-6 rounded-full h-14 w-14 bg-[#3D5F7B] hover:bg-[#2C4A5A] shadow-lg z-50 transform-color">
-          <ShoppingCartIcon />
+          <ShoppingCartIcon strokeWidth={2.5} />
         </Button>
       </SheetTrigger>
 
@@ -204,7 +194,7 @@ export function CartSheet({
         {items.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground gap-3">
             <Frown className="h-10 w-10 opacity-40" />
-            <p >Your cart is empty</p>
+            <p>Your cart is empty</p>
           </div>
         ) : (
           <ScrollArea className="flex-1 px-4">
