@@ -79,21 +79,27 @@ function CartRow({
             type="number"
             min={MIN_QTY}
             max={MAX_QTY}
-            value={item.quantity}
-            inputMode="numeric"
+            value={qty}
             onChange={(e) => {
-              const value = Number(e.target.value);
-              if (Number.isNaN(value)) return;
+              const value = e.target.value;
 
-              const safeQty = Math.max(MIN_QTY, Math.min(value, MAX_QTY));
+              // permite digitar vazio temporariamente
+              if (value === "") {
+                setQty("");
+                return;
+              }
 
-              onUpdate(safeQty);
+              const numeric = Number(value);
+              if (Number.isNaN(numeric)) return;
+
+              setQty(numeric);
             }}
             onBlur={() => {
-              const safeQty = Math.max(
-                MIN_QTY,
-                Math.min(item.quantity, MAX_QTY),
-              );
+              const numeric = qty === "" ? item.quantity : Number(qty);
+
+              const safeQty = Math.max(MIN_QTY, Math.min(numeric, MAX_QTY));
+
+              setQty(safeQty);
               onUpdate(safeQty);
             }}
             onKeyDown={(e) => {
@@ -102,18 +108,18 @@ function CartRow({
               }
             }}
             className="
-    w-12
-    text-center
-    border
-    rounded-md
-    text-sm
-    focus:outline-none
-    focus:ring-2
-    focus:ring-[#3D5F7B]
-    [appearance:textfield]
-    [&::-webkit-outer-spin-button]:appearance-none
-    [&::-webkit-inner-spin-button]:appearance-none
-  "
+              w-12
+              text-center
+              border
+              rounded-md
+              text-sm
+              focus:outline-none
+              focus:ring-2
+              focus:ring-[#3D5F7B]
+              [appearance:textfield]
+              [&::-webkit-outer-spin-button]:appearance-none
+              [&::-webkit-inner-spin-button]:appearance-none
+            "
           />
 
           <Button
