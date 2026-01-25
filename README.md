@@ -65,7 +65,7 @@ npm -v
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/life-is-string/POC-simple-online-order-system
 ```
 
 2. Navigate to the project root:
