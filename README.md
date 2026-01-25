@@ -1,7 +1,8 @@
 # POC Online Order and Cart API System
 <img width="1875" height="890" alt="image" src="https://github.com/user-attachments/assets/0ac4a7ff-381d-4467-9eb6-d2dcbf402b58" />
+<br><br>
 This repository contains a **Proof of Concept (POC)** built to validate the system architecture, dependencies, and core application flow.
-
+<br><br>
 The goal of this project is to serve as an experimental base for testing features, frontend/backend integration, and development environment setup.
 
 ## Dependencies
