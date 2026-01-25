@@ -50,7 +50,7 @@ The project is managed from the **root directory**, which orchestrates both fron
 
 Before running the project, make sure you have:
 
-* **Node.js 18+**
+* **[Node.js 18+](https://nodejs.org/en/download)**
 * **npm** (included with Node.js)
 
 Check your versions:
