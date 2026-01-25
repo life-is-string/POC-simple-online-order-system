@@ -77,7 +77,6 @@ cd POC-simple-online-order-system
 3. Install dependencies:
 
 ```bash
-npm install
 cd backend
 npm install
 cd ..
