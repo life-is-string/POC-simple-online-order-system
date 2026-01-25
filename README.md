@@ -83,6 +83,11 @@ cd ..
 cd frontend
 npm install
 ```
+Or run in the **root directory**
+
+```bash
+npm install
+```
 
 ## ▶️ Running the Project
 
