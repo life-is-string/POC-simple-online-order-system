@@ -107,14 +107,6 @@ This command runs both frontend and backend in development mode.
 
 Ports may vary depending on configuration. Check the terminal output if needed.
 
-## Development notes
-
-This initiative provided an opportunity to explore and strengthen my experience with full-stack development using and learning more about React and Node.js. The process all along involved architectural design and planning, full-time research, and iterative system implementations. 
-
-In the end, I am very satisfied with the final stable version, which guarantees a functional frontend–backend integration and a user-friendly graphical interface. Overall, this development journey was both technically enriching and professionally rewardful.
-<br><br>
-![Concept idea flow](https://github.com/life-is-string/POC-simple-online-order-system/blob/main/fluxo_poc.png)
-
 ### Implemented functionalities:
 * [x] Product Listing
   * Return a list of products from the database with: id, name, description, price, image (image is optional, can be static).
