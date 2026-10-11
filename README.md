@@ -122,12 +122,13 @@ Ports may vary depending on configuration. Check the terminal output if needed.
   * Display success screen/message.
   * Clear cart after checkout.
 * [x] Posted Orders Database API
- * A routine to actually record valid checkouts in the database, generates a unique ID and stores the placing date.
- * Users can successfully view the active session's submitted orders by accessing the database endpoint view via UI.
+  * A routine to actually record valid checkouts in the database, generates a unique ID and stores the placing date.
+  * Users can successfully view the active session's submitted orders by accessing the database endpoint view via UI.
 * [x] Functional
   * Cart persistence in localStorage.
   * Feedback toasts (e.g., "Product added
   successfully").
+  * Order table lifecycle.
   * Componentization and UI reusability.
   * Styling with a framework
   * Folder organization following good practices.
