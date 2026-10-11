@@ -111,19 +111,25 @@ Ports may vary depending on configuration. Check the terminal output if needed.
 * [x] Product Listing
   * Return a list of products from the database with: id, name, description, price, image (image is optional, can be static).
 * [x] Cart (API)
+
+  <img width="25%" height="auto" alt="image" src="https://github.com/user-attachments/assets/687a4d56-b36c-431b-903e-8add200dde3d" />
+  
   * Add item to cart.
   * Remove item from cart.
   * Change quantity.
   * Validation (minimum quantity per product = 1, maximum quantity per product = 10).
-  Order Checkout (simulated)
-  * Endpoint that receives the cart, marks it as sent, and returns a success message.
 * [x] Order Checkout
   * Button to finalize.
+  * Receives the cart, marks it as sent, and returns a success message.
   * Display success screen/message.
   * Clear cart after checkout.
 * [x] Posted Orders Database API
+
+  <img width="25%" height="auto" alt="image" src="https://github.com/user-attachments/assets/5f85e805-2172-49fb-a0b8-ed0c8e528cf5" />
+  
   * A routine to actually record valid checkouts in the database, generates a unique ID and stores the placing date.
   * Users can successfully view the active session's submitted orders by accessing the database endpoint view via UI.
+
 * [x] Functional
   * Cart persistence in localStorage.
   * Feedback toasts (e.g., "Product added
